@@ -28,3 +28,7 @@ incrementUsage usage load =
 getWh : List Usage -> Float
 getWh load =
     sum ( map Usage.getWh load )
+
+getAmps : Int -> List Usage -> Float
+getAmps voltage load =
+    sum ( map ( Usage.getAmps voltage ) load  )
