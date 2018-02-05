@@ -1,6 +1,6 @@
 module Load exposing (..)
 
-import Usage exposing (Usage, Appliance)
+import Usage exposing (Usage)
 import List exposing (isEmpty, filter, map, sum)
 
 -- MODEL
