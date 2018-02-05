@@ -24,11 +24,11 @@ batteries =
 recommend : Int -> List Usage -> Maybe ( List Battery )
 recommend volt load =
     let
-      smallestPack : Float -> Battery -> List Battery
-      smallestPack amps battery =
+      getSmallestPack : Float -> Battery -> List Battery
+      getSmallestPack amps battery =
           repeat ( ceiling ( amps / toFloat battery.ah ) ) battery
     in
-        head ( sortBy packPrice ( map ( smallestPack ( getAmps volt load ) ) batteries ) )
+        head ( sortBy packPrice ( map ( getSmallestPack ( getAmps volt load ) ) batteries ) )
 
 packPrice : List Battery -> Float
 packPrice batteryPack =
