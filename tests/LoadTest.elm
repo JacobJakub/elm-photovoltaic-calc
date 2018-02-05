@@ -40,7 +40,7 @@ suite =
                       l : List Usage
                       l = []
                       addUsage =
-                        l |> add (Usage (Appliance "Macbook" 60.0) 60) |> add (Usage (Appliance "Macbook" 120.0) 60)
+                        add (Usage (Appliance "Macbook" 180.0) 60) l
                     in
                         Expect.equal ( getAmps 12 addUsage ) 15
             ]
