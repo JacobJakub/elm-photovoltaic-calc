@@ -10,17 +10,27 @@ suite : Test
 suite =
     describe "The Load module"
         [ describe "add"
-              [ describe "new appliance"
+              [ describe "Multiple appliances"
                     [ test "Adds new Usage" <|
                           \_ ->
                             let
                                 l : List Usage
                                 l = []
                                 addUsage =
-                                  add (Usage (Appliance "Macbook" 80.0) 45) l
+                                  l |> add (Usage (Appliance "Macbook" 80.0) 45) |> add (Usage (Appliance "Kettle" 80.0) 45)
                             in
-                                Expect.equal (List.length addUsage) 1
+                                Expect.equal (List.length addUsage) 2
+                    ]
+              , describe "Single appliace"
+                    [ test "Increases existing usage" <|
+                          \_ ->
+                            let
+                                l : List Usage
+                                l = []
+                                addUsage =
+                                  l |> add (Usage (Appliance "Macbook" 80.0) 45) |> add (Usage (Appliance "Macbook" 80.0) 50)
+                            in
+                                Expect.equal addUsage [Usage (Appliance "Macbook" 80.0) 95]
                     ]
               ]
         ]
-
