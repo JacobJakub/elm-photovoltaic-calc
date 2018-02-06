@@ -22,10 +22,10 @@ batteries =
         liFePO4 =
             Battery "LiFePO4" 80
     in
-    [ liFePO4 40 215.04
-    , liFePO4 60 309.12
-    , liFePO4 90 483.84
-    ]
+        [ liFePO4 40 215.04
+        , liFePO4 60 309.12
+        , liFePO4 90 483.84
+        ]
 
 
 recommend : Int -> List Usage -> Maybe (List Battery)
@@ -37,10 +37,10 @@ recommend volt load =
                 |> ceiling
                 |> flip repeat battery
     in
-    batteries
-        |> map (getSmallestPack <| getAmps volt load)
-        |> sortBy packPrice
-        |> head
+        batteries
+            |> map (getSmallestPack <| getAmps volt load)
+            |> sortBy packPrice
+            |> head
 
 
 packPrice : List Battery -> Float
