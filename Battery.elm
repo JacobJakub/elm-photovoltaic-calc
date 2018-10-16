@@ -1,4 +1,4 @@
-module Battery exposing (Battery, recommend)
+module Battery exposing (Battery, recommend, packUsableCharge)
 
 import List exposing (head, map, repeat, sortBy, sum)
 import Load exposing (getAmps)
@@ -11,7 +11,7 @@ import Usage exposing (Usage)
 type alias Battery =
     { name : String
     , maxDischargePercentage : Int
-    , ah : Int
+    , ah : Float
     , price : Float
     }
 
@@ -46,3 +46,11 @@ recommend volt load =
 packPrice : List Battery -> Float
 packPrice =
     sum << map .price
+
+usableCharge : Battery -> Float
+usableCharge bat =
+    bat.ah * ( toFloat bat.maxDischargePercentage / 100.0 )
+
+packUsableCharge : List Battery -> Int
+packUsableCharge =
+        sum << map usableCharge
